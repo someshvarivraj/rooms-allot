@@ -14,6 +14,7 @@ export default function LoginCard() {
     <div className="flex items-center justify-center  ">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-2xl  text-center mb-6">Login</h2>
+
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
@@ -33,17 +34,18 @@ export default function LoginCard() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button
-            type="submit"
-            className="w-full  bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600 focus:outline-none"
-          >
-            Login
-          </button>
         </form>
         <span></span>
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white   py-3 rounded-md hover:bg-blue-600 focus:outline-none"
+        >
+          Login
+        </button>
+
         <h2
-          className="mt-5 text-blue-400 underline cursor-pointer hover:text-blue-500 "
-          onClick={()=>navigate("/signup")}
+          className="mt-5 text-blue-400 underline cursor-pointer hover:text-blue-500  "
+          onClick={() => navigate("/signup")}
         >
           create an account
         </h2>
