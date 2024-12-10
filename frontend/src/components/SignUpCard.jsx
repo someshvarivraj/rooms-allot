@@ -1,13 +1,49 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import { signUpUser } from "../services/authServices";
 export default function SignUpCrad() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with", { username, password });
+
+    if (!username || !password) {
+      alert("Please fill in both fields.");
+      return;
+    }
+
+    e.preventDefault();
+
+    try {
+      const response = await signUpUser(username, password); // Use the API function
+
+      if (
+        response.status === 201 &&
+        response.data.message === "User registered successfully"
+      ) {
+        navigate("/signin"); // Navigate to user-specific dashboard
+      } else {
+        alert("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("Error during login", error);
+      alert("Error logging in. Please try again.");
+    }
+    // try {
+    //   const response = await axios.post("http://localhost:4000/signup", {
+    //     username,
+    //     password,
+    //   });
+
+    //   //** EMAIL Verification */
+
+    //   navigate("/login");
+    // } catch (error) {
+    //   console.error("Error during sign-up", error);
+    //   alert("Error registering user. Please try again.");
+    // }
   };
 
   return (
@@ -43,7 +79,7 @@ export default function SignUpCrad() {
         <span></span>
         <h2
           className="mt-5 text-blue-400 underline cursor-pointer hover:text-blue-500"
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/signin")}
         >
           Already have an account
         </h2>
