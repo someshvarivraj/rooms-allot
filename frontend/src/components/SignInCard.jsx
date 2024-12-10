@@ -1,13 +1,50 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
+import { loginUser } from "../services/authServices";
 export default function LoginCard() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with", { username, password });
+    if (!username || !password) {
+      alert("Please fill in both fields.");
+      return;
+    }
+    try {
+      const response = await loginUser(username, password); // Use the API function
+
+      if (
+        response.status === 200 &&
+        response.data.message === "Login successful"
+      ) {
+        navigate("/dashboard"); // Navigate to user-specific dashboard
+      } else {
+        alert("Invalid username or password.");
+      }
+    } catch (error) {
+      console.error("Error during login", error);
+      alert("Error logging in. Please try again.");
+    }
+    // try {
+    //   const response = await axios.post("http://localhost:4000/signin", {
+    //     username,
+    //     password,
+    //   });
+
+    //   if (
+    //     response.status === 200 &&
+    //     response.data.message === "Login successful"
+    //   ) {
+    //     navigate("/dashboard");
+    //   } else {
+    //     alert("Invalid username or password.");
+    //   }
+    // } catch (error) {
+    //   console.error("Error during login", error);
+    //   alert("Error logging in. Please try again.");
+    // }
   };
 
   return (
@@ -34,14 +71,14 @@ export default function LoginCard() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white   py-3 rounded-md hover:bg-blue-600 focus:outline-none"
+          >
+            Login
+          </button>
         </form>
         <span></span>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white   py-3 rounded-md hover:bg-blue-600 focus:outline-none"
-        >
-          Login
-        </button>
 
         <h2
           className="mt-5 text-blue-400 underline cursor-pointer hover:text-blue-500  "
