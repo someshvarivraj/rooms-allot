@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar from "../../components/Navbar.jsx";
 import Theme from "../../components/Theme.jsx";
-
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
 const Dashboard = () => {
   const rooms = [
     "Room 1",
@@ -37,7 +37,12 @@ const Dashboard = () => {
       <div className="p-4">
         <div className="grid grid-cols-[150px_repeat(24,_1fr)] gap-2 border border-gray-400 p-2">
           {/* Header Row */}
-          <div className="text-center border border-gray-400 ">Rooms</div>
+          <div className="text-center border border-gray-400 ">
+            {" "}
+            <MeetingRoomIcon className="flex mr-1" />
+            Rooms
+          </div>
+
           {hours.map((hour, index) => (
             <div key={index} className="text-center  border border-gray-400 ">
               {hour}

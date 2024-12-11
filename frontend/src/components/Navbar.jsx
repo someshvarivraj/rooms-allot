@@ -1,6 +1,7 @@
 import React from "react";
 import TodayIcon from "@mui/icons-material/Today";
-const Navbar = () => {
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+
   return (
     <div className="flex w-full justify-between">
       <div className="navbar bg-base-100">
@@ -57,6 +58,12 @@ const Navbar = () => {
               </svg>
               <span className="badge badge-xs badge-primary indicator-item"></span>
             </div>
+          </button>
+          <button
+            onClick={handleLogout}
+            className="btn  btn-circle mr-10 ml-10"
+          >
+            <ExitToAppIcon />
           </button>
         </div>
       </div>

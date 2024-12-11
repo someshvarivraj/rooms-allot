@@ -64,8 +64,6 @@ exports.signin = async (req, res) => {
     //res.cookie("test", "value", { maxAge: 60 * 60 * 1000 });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production", // Set to true in production
-      sameSite: "strict", // Controls cross-origin requests
     });
 
     res.status(200).json({ message: "Login successful", token });
